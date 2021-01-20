@@ -1,0 +1,88 @@
+Tudorache Bogdan-Mihai 324CA
+
+## AA - Tema1, etapa2 ##
+
+
+
+# Introducere #
+
+Problema aleasa de mine este distanta de la un nod la toate celelalte in graf, cu muchii care au asociate un cost.
+
+Am ales sa implementez algoritmii Dijkstra, Bellman Ford, si un algoritm eficient pentru grafuri orientate aciclice(DAG).
+
+Algoritmii au fost implementati in java, folosind compilatorul openJDK 11, pe un sistem Linux Mint pe 64 biti.
+
+Pentru implementari m-am inspirat in mare parte din cartea Algorithms 4th Edition, scrisa de Robert Sedgewick si
+Kevin Wayne, de la sectiunea 4.4 Shortest Paths. 
+
+Pentru algoritmul lui Dijkstra, am avut nevoie de un heap modificat pentru a avea operatii de a mari prioritatea
+unui nod aflat la un anumit index sau de a scadea prioritatea unui nod aflat la un anumit index. Am folosit un astfel 
+de heap deja implementat, IndexMinPQ.java, preluat de pe website-ul asociat
+cartii Algorithms 4th Edition (https://algs4.cs.princeton.edu/code/).
+
+
+
+# Descrierea arhivei #
+
+# makefile - un makefile pentru a compila sursele java ce are reguli de build, run, clean:
+
+- make - compileaza sursele
+- make run - ruleaza toate testele prin TestRunner si salveaza rezultatul lor in out/
+- make clean - sterge fisierele .class
+
+
+# in/ - contine fisierele de intrare. Fiecare algoritm in parte are propriile test, fiecare avand prefixul specific
+(testele care incep cu 'test0' sunt pentru Dijkstra, cele care incep cu 'test1' sunt pentru Bellman Ford, iar cele care 
+incep cu 'test2' sunt pentru algoritmul pentru grafuri aciclice). Pentru fiecare algoritm, primele 5 teste au fost construite
+'de mana', pentru a verifica corectitudinea algoritmilor, iar ultimele 5 teste sunt generate automat, folosint scriptul
+test_generator.py. In total sunt 30 de teste.
+
+Fiecare test contine pe prima linie numarul n de noduri, numarul m de muchii si nodul sursa s din care se face cautarea.
+Urmatoarele m linii contin muchiile grafului
+
+Pentru a adauga noi teste pentru verificare, adaugati testul cu numele prefixul asociat fiecarui algoritm, urmat 
+de numarul asociat testului. Pentru mai multe detalii pentru modul in care sunt rulate testele, verificati fisierul
+TestRunner.java
+
+Testele pentru Dijkstra contin grafuri normale (pot fi ciclice) cu muchii pozitive.
+
+Testele pentru BellmanFord contin grafuri normale (pot fi ciclice) cu muchii pozitive si negative. Ultimele 2 teste nu 
+au muchii negative, pentru ca mi-a fost greu sa generez grafuri care nu au cicluri negative (Algoritmul nu functioneaza
+pentru cicluri negative).
+
+Testele pentru algoritmul aciclic contin grafuri aciclice cu muchii pozitive. 
+
+
+# out/ - contine rezultatele rularii fisierelor de intrare. Numele fisierelor de intrare si de iesire sunt aceleasi.
+
+Fisierele de iesire contin pe fiecare linie distanta pana la nodul corespunzator (incepand de la 0 la n).
+
+
+# test_generator.py - un script scris de catre mine in python pentru a genera grafuri. 
+
+
+# TestRunner.java - secventa de cod care ruleaza toate testele pe algoritmii corespunzatori.
+
+
+# EdgeWeightedDigraph.java - modelarea grafului orientat cu muchii care au asociate un cost. Implementarea nu foloseste
+matrice de adiacenta, ci liste.
+
+
+# DirectedEdge.java - modelarea muchiilor din graf.
+
+
+# Dijkstra.java - implementarea algoritmului lui Dijkstra.
+
+
+# IndexMinPQ.java - implementarea de heap indexat, folosita pentru algoritmul lui Dijkstra, preluata in totalitate
+de pe https://algs4.cs.princeton.edu/code/, asa cum am specificat mai sus.
+
+
+# BellmanFord.java - implementarea algoritmului Bellman Ford.
+
+
+# AcyclicShortestPath.java - implementarea algoritmului eficient pentru grafuri aciclice.
+
+
+# DFS.java - implementarea unei parcurgere in adancime, folosita pentru a sorta topologic un graf, pentru algoritmul
+eficient pentru grafuri aciclice.
