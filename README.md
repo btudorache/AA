@@ -4,7 +4,7 @@ Temele de la Analiza Algoritmilor 2020-2021 seria CA. Implementarea temelor esta
 
 ## Teme 
  
-* Tema 1 - Studiul unei probleme clasice de algoritmi. (Am ales **drumul cel mai scurt intr-un graf de la un nod la toate celelate**)
+* Tema 1 - Studiul unei probleme clasice de algoritmi. (Am ales **drumul cel mai scurt intr-un graf de la un nod la toate celelate**).
     * Rezolvarea problemei folosind 3 algoritmi:
         * Dijsktra
         * Bellman-Ford
@@ -13,3 +13,5 @@ Temele de la Analiza Algoritmilor 2020-2021 seria CA. Implementarea temelor esta
     * Realizarea unui studiu comparativ privind algoritmii care rezolva problema aleasa
     
 * Tema 2 -
+
+Mai multe detalii se pot gasi in folderele specifice fiecarei teme.
