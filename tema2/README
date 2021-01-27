@@ -1,0 +1,102 @@
+Tudorache Bogdan Mihai 324CA
+
+AA Tema 2 - Gigel si mafiotii
+
+
+
+# Task 1
+	
+	In primul task trebuie de fapt sa reducem problema k-colorarii la problema SAT. Pentru acest lucru, in primul
+	rand am format numarul de variabile ce trebuie mapate pentru a face reducerea. Pentru fiecare nod n, am creat 
+	k variable pentru a stabili daca nodul n are culoarea k, deci n * k variabile in total. 
+
+	In ceea ce priveste numarul de clauze ce trebuie introduse, am identificat 3 tipuri de clauze care pot reduce 
+	problema k-colorarii la problema SAT:
+
+	1. Fiecare nod trebuie sa aiba cel putin o culoare
+	Numar de clauze: n
+
+	2. Fiecare nod trebuie sa aiba cel mult o culoare (un nod nu poate avea 2 culori in acelasi timp)
+	Numar de clauze: n * k * (k - 1) / 2
+
+	3. Doua noduri care sunt legate printr-o muchie trebuie sa aiba culori diferite
+	Numar de clauze: m * k (m este numarul de muchii)
+
+	Prin codificarea acestor 3 tipuri de clauze putem reduce problema k-colorarii la SAT.
+
+	Dupa ce primim raspunsul de la oracol, fiecare dintre cele n * k variabile poate fi interpretate astfel: 
+
+	Nodul i are variabilele (i - 1) * k + 1, (i - 1) * k + 2 pana la (i -1) * k + k;
+	Culoarea cu care va fi colorat un nod este asociata ultimului termen al variabilei adevarate
+	(daca termenul adevarat este (i - 1) * k + 4, culoarea o sa fie 4).
+
+	Complexitatea temporala este proportionala cu numarul de clauze ce trebuie scrise:
+
+	O(n + n * k * (k - 1) / 2 + m * k) care cel mai probabil este O(n * k^2 + m * k).
+
+# Task 2
+
+	In al doilea task trebuie de fapt sa reducem problema k-clicii la SAT. Variabilele noi create pentru a face
+	reducerea sunt urmatoarele: Pentru fiecare nod n, am creat k variabile pentru a stabili daca nodul n este pe
+	pozitia k in clica, deci n * k variabile in total.
+
+	Pentru a reduce problema la SAT, trebuie sa introducem 3 tipuri de clauze:
+
+	1. Unul dintre noduri este al i-lea nod din clica (1 <= i <= k)
+	Numar de clauze: k
+
+	2. Nici un nod nu poate sa fie in acelasi timp al i-lea si al j-lea nod din clica
+	Numar de clauze: n * k * (k - 1) / 2
+
+	3. Daca nu exista muchie de la i la j, nodurile i si j nu pot fi in aceeasi clica
+	Numar de clauze: (n * (n - 1) / 2 - m) * (k  * (k - 1) / 1)
+
+	Prin codificarea acestor 3 tipuri de clauze putem reduce problema k-colorarii la SAT.
+
+	Dupa ce primim raspunsul de la oracol, fiecare dintre cele n * k variabile pot fi interpretate astfel:
+
+	Nodul i are variabilele (i - 1) * k + 1, (i - 1) * k + 2 pana la (i -1) * k + k;
+	Daca o variabila este adevarata, inseamna ca nodul asociat variabilei (adica i) face parte din clica.
+	(daca termenul adevarat este (i - 1) * k + 4, culoarea o sa fie i)
+
+	Complexitatea temporala este proportionala cu numarul de clauze ce trebuie scrise:
+
+	O(k + n * k * (k - 1) / 2 + (n * (n - 1) / 2 - m) * (k  * (k - 1) / 1)) care este O((n^2 - m) * k^2).
+
+# Task 3 
+
+	In taskul 3 trebuie sa reducem Vertex Cover (numarul minim de noduri care acopera prin muchii tot graful) la problema k-clicii.
+
+	Daca luam un graf G si obtinel graful lui complementar G', daca rezolvam problema k-clicii pentru G', nodurile care nu sunt in
+	clica lui G' sunt de fapt numarul minim de noduri care acopera tot graful G. 
+
+	Astfel, pentru graful complementar, incercam pe rand sa cautam o clica n, n-1, n-2, ... 1 noduri, pana cand se poate gasi o astfel de clica. Cand am gasit aceasta clica, obtinem raspunsul (raspunsul de la task-ul 2), iar nodurile care nu fac parte
+	din raspuns formeaza de fapt acest vertex cover pe care il cautam. 
+
+	Pentru a reduce Task3 la Task2, trebuie de fapt sa bagam ca input in Task2 complementul grafului dat ca input in Task3. Rezolvam
+	Task2 cum am explicat mai sus pana cand gasim o clica valabila, iar nodurile care nu fac parte din aceasta clica sunt numarul minim de noduri care acopera tot graful.
+
+	Complexitatea temporala este n * complexitatea de la Task2:
+
+	n * O((n^2 - m) * k^2) adica O(n * (n^2 - m) * k^2)
+
+
+# Bonus
+
+	La bonus trebuie de fapt sa reducem Vertex Cover la SAT in mod direct.
+
+	Ne putem folosi de formatul Partial MaxSat pentru a introduce niste soft clauses
+
+	Variabilele necesare pentru a construi reducerea sunt nodurile din graf. Pentru reducere, trebuie sa introducem un hard-clause
+	si un soft-clause:
+
+	Hard-clause: Daca o muchie leagea doua noduri i si j, fie i sau j trebuie sa fie inclusa in multimea vertex cover
+
+	Soft-clause: Pentru fiecare nod, oricare dintre aceste noduri poate sa nu se afle in multimea vertex cover
+
+	Prin codificarea acestor tipuri de clauze, putem reduce direct Minimum Vertex Cover la Partial Max-SAT.
+
+	Raspunsul de la oracol poate fi interpretat astfel: daca una dintre variabile este mai mare ca 0, indicele acelei variabile
+	este un nod care se afla in Minimum Vertex Cover
+
+	Complexitatea temporala depinde de numarul de clause: O(n + m)
