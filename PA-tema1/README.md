@@ -58,9 +58,9 @@ numai din muntii i-1 numai valorile cu taieturi care respecta constrangerea. Pen
 minimul din dimensiunea anterioara si actualizam noua valoare.
 
 
-**Complexitate temporala: O(3 * n) = O(n)**.
+**Complexitate temporala: O(3n) = O(n)**.
 
-**Complexitate spatiala: O(3 * n) = O(n)**.
+**Complexitate spatiala: O(3n) = O(n)**.
 
 ## Problema 5
 
